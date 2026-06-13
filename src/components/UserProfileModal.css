@@ -1,0 +1,179 @@
+.user-profile-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.user-profile-modal {
+  background: #1e1e2e;
+  border: 1px solid #313244;
+  border-radius: 16px;
+  padding: 30px;
+  min-width: 280px;
+  max-width: 350px;
+  text-align: center;
+  position: relative;
+  animation: slideUp 0.2s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: #6c7086;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: #f38ba8;
+}
+
+.modal-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 15px;
+  overflow: hidden;
+  border: 3px solid #667eea;
+}
+
+.modal-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-avatar .avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.modal-username {
+  color: white;
+  font-size: 1.4rem;
+  margin: 0 0 12px 0;
+}
+
+.modal-badges {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.team-role-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.team-role-badge.owner {
+  background: linear-gradient(135deg, #f9e2af, #fab387);
+  color: #11111b;
+}
+
+.team-role-badge.admin {
+  background: linear-gradient(135deg, #cba6f7, #f5c2e7);
+  color: #11111b;
+}
+
+.team-role-badge.moderator {
+  background: linear-gradient(135deg, #94e2d5, #89dceb);
+  color: #11111b;
+}
+
+.team-role-badge.member {
+  background: rgba(255, 255, 255, 0.1);
+  color: #cdd6f4;
+}
+
+.platform-role-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.platform-role-badge.superuser {
+  background: linear-gradient(135deg, #f9e2af, #fab387);
+  color: #11111b;
+}
+
+.platform-role-badge.admin {
+  background: linear-gradient(135deg, #f38ba8, #cba6f7);
+  color: #11111b;
+}
+
+.platform-role-badge.staff {
+  background: linear-gradient(135deg, #89b4fa, #74c7ec);
+  color: #11111b;
+}
+
+.modal-joined {
+  color: #6c7086;
+  font-size: 0.85rem;
+  margin: 0 0 20px 0;
+}
+
+.admin-view-btn {
+  width: 100%;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #f9e2af, #fab387);
+  border: none;
+  border-radius: 10px;
+  color: #11111b;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.admin-view-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(249, 226, 175, 0.3);
+}

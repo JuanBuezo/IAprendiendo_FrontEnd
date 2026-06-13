@@ -1,14 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getProfile, clearTokens, updateProfile } from '../services/auth'
+import { getProfile } from '../services/auth'
+import Navbar from '../components/Navbar'
 import '../styles/Home.css'
 
 function Home() {
   const [user, setUser] = useState(null)
-  const [showProfile, setShowProfile] = useState(false)
-  const [editMode, setEditMode] = useState(false)
-  const [newUsername, setNewUsername] = useState('')
-  const [error, setError] = useState('')
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
 
@@ -20,27 +17,10 @@ function Home() {
     try {
       const data = await getProfile()
       setUser(data)
-      setNewUsername(data.username)
     } catch (err) {
       navigate('/')
     } finally {
       setLoading(false)
-    }
-  }
-
-  const handleLogout = () => {
-    clearTokens()
-    navigate('/')
-  }
-
-  const handleUpdateUsername = async () => {
-    setError('')
-    try {
-      const updated = await updateProfile({ username: newUsername })
-      setUser(updated)
-      setEditMode(false)
-    } catch (err) {
-      setError(err.message)
     }
   }
 
@@ -54,83 +34,29 @@ function Home() {
 
   return (
     <div className="home-container">
-      <nav className="navbar">
-        <h2 className="logo">IAprendiendo</h2>
-        <div className="nav-buttons">
-          <button className="nav-btn" onClick={() => setShowProfile(!showProfile)}>
-            {showProfile ? 'Cerrar Perfil' : 'Mi Perfil'}
-          </button>
-          <button className="nav-btn logout" onClick={handleLogout}>
-            Cerrar Sesión
-          </button>
-        </div>
-      </nav>
-
-      {showProfile && user && (
-        <div className="profile-card">
-          <h3>Mi Perfil</h3>
-          <div className="profile-info">
-            <div className="profile-field">
-              <span className="label">ID:</span>
-              <span className="value">{user.id}</span>
-            </div>
-            <div className="profile-field">
-              <span className="label">Username:</span>
-              {editMode ? (
-                <input
-                  type="text"
-                  value={newUsername}
-                  onChange={(e) => setNewUsername(e.target.value)}
-                  className="edit-input"
-                />
-              ) : (
-                <span className="value">{user.username}</span>
-              )}
-            </div>
-            <div className="profile-field">
-              <span className="label">Email:</span>
-              <span className="value">{user.email}</span>
-            </div>
-            <div className="profile-field">
-              <span className="label">Rol:</span>
-              <span className="value">{user.role}</span>
-            </div>
-            <div className="profile-field">
-              <span className="label">Miembro desde:</span>
-              <span className="value">
-                {new Date(user.date_joined).toLocaleDateString('es-ES')}
-              </span>
-            </div>
-          </div>
-          {error && <div className="error-message">{error}</div>}
-          <div className="profile-actions">
-            {editMode ? (
-              <>
-                <button className="action-btn save" onClick={handleUpdateUsername}>
-                  Guardar
-                </button>
-                <button className="action-btn cancel" onClick={() => setEditMode(false)}>
-                  Cancelar
-                </button>
-              </>
-            ) : (
-              <button className="action-btn edit" onClick={() => setEditMode(true)}>
-                Editar Username
-              </button>
-            )}
-          </div>
-        </div>
-      )}
+      <Navbar />
 
       <div className="main-content">
         <h1>Bienvenido{user ? `, ${user.username}` : ''}</h1>
-        <div className="cristiano-container">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Cristiano_Ronaldo_2018.jpg"
-            alt="Cristiano Ronaldo"
-            className="cristiano-img"
-          />
-          <p className="caption">SIUUUUU!</p>
+
+        <div className="dashboard-grid">
+          <div className="dashboard-card" onClick={() => navigate('/teams')}>
+            <div className="card-icon">👥</div>
+            <div className="card-content">
+              <h2>Equipos</h2>
+              <p>Colabora con tu equipo en canales de texto, voz y comparte archivos</p>
+            </div>
+            <div className="card-arrow">→</div>
+          </div>
+
+          <div className="dashboard-card" onClick={() => navigate('/projects')}>
+            <div className="card-icon">📁</div>
+            <div className="card-content">
+              <h2>Proyectos</h2>
+              <p>Accede a tus proyectos editados recientemente</p>
+            </div>
+            <div className="card-arrow">→</div>
+          </div>
         </div>
       </div>
     </div>

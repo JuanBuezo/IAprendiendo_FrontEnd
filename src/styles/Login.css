@@ -50,6 +50,24 @@
   font-size: 16px;
   transition: border-color 0.3s;
   box-sizing: border-box;
+  color: #333 !important;
+  background: white !important;
+  -webkit-text-fill-color: #333 !important;
+}
+
+/* Fix para autocompletado de Chrome/Edge */
+.form-group input:-webkit-autofill,
+.form-group input:-webkit-autofill:hover,
+.form-group input:-webkit-autofill:focus,
+.form-group input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  -webkit-text-fill-color: #333 !important;
+  color: #333 !important;
+}
+
+.form-group input::placeholder {
+  color: #999;
+  -webkit-text-fill-color: #999;
 }
 
 .form-group input:focus {

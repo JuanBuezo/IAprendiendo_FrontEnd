@@ -1,0 +1,137 @@
+.projects-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+  color: white;
+  font-size: 24px;
+  margin: 0;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.nav-btn.logout {
+  background: #e74c3c;
+}
+
+.nav-btn.logout:hover {
+  background: #c0392b;
+}
+
+.projects-content {
+  flex: 1;
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.projects-header {
+  margin-bottom: 30px;
+}
+
+.projects-header h1 {
+  color: white;
+  margin: 0;
+  font-size: 32px;
+}
+
+.no-projects {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.empty-icon {
+  font-size: 80px;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.no-projects p {
+  color: #9ca3af;
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.no-projects .hint {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.project-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.project-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.project-icon {
+  font-size: 36px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(102, 126, 234, 0.2);
+  border-radius: 10px;
+}
+
+.project-info h3 {
+  color: white;
+  margin: 0 0 5px 0;
+  font-size: 16px;
+}
+
+.project-date {
+  color: #6b7280;
+  font-size: 13px;
+  margin: 0;
+}

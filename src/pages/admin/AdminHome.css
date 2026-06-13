@@ -1,0 +1,254 @@
+.admin-home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.admin-content {
+  flex: 1;
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.admin-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.admin-header h1 {
+  color: #f9e2af;
+  font-size: 2.5rem;
+  margin: 0 0 10px 0;
+}
+
+.admin-subtitle {
+  color: #9ca3af;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.loading {
+  color: white;
+  text-align: center;
+  padding: 60px;
+  font-size: 18px;
+}
+
+/* Stats Section */
+.stats-section {
+  margin-bottom: 40px;
+}
+
+.stats-section h2 {
+  color: #cdd6f4;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+.stat-value {
+  display: block;
+  color: #f9e2af;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.stat-label {
+  color: #9ca3af;
+  font-size: 0.85rem;
+}
+
+/* Admin Options Section */
+.admin-options-section {
+  margin-bottom: 30px;
+}
+
+.admin-options-section h2 {
+  color: #cdd6f4;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.admin-options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 15px;
+}
+
+.admin-option-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-option-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.admin-option-card.blue {
+  border-color: rgba(137, 180, 250, 0.3);
+}
+
+.admin-option-card.blue:hover {
+  background: rgba(137, 180, 250, 0.1);
+}
+
+.admin-option-card.blue .option-icon {
+  background: linear-gradient(135deg, #89b4fa, #74c7ec);
+}
+
+.admin-option-card.green {
+  border-color: rgba(166, 227, 161, 0.3);
+}
+
+.admin-option-card.green:hover {
+  background: rgba(166, 227, 161, 0.1);
+}
+
+.admin-option-card.green .option-icon {
+  background: linear-gradient(135deg, #a6e3a1, #94e2d5);
+}
+
+.admin-option-card.red {
+  border-color: rgba(243, 139, 168, 0.3);
+}
+
+.admin-option-card.red:hover {
+  background: rgba(243, 139, 168, 0.1);
+}
+
+.admin-option-card.red .option-icon {
+  background: linear-gradient(135deg, #f38ba8, #eba0ac);
+}
+
+.option-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #11111b;
+  flex-shrink: 0;
+}
+
+.option-content {
+  flex: 1;
+}
+
+.option-content h3 {
+  color: white;
+  font-size: 1.1rem;
+  margin: 0 0 5px 0;
+}
+
+.option-content p {
+  color: #9ca3af;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.option-arrow {
+  color: #6c7086;
+  font-size: 1.2rem;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s;
+}
+
+.admin-option-card:hover .option-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Section Divider */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 30px 0;
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.section-divider span {
+  color: #6c7086;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Normal Options */
+.normal-options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.normal-option-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.normal-option-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.normal-option-card .option-icon {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  width: 45px;
+  height: 45px;
+  font-size: 1.3rem;
+}
+
+.normal-option-card .option-content h3 {
+  font-size: 1rem;
+}
+
+.normal-option-card .option-content p {
+  font-size: 0.8rem;
+}
+
+.normal-option-card:hover .option-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}

@@ -1,0 +1,309 @@
+.teams-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+  color: white;
+  font-size: 24px;
+  margin: 0;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.nav-btn.logout {
+  background: #e74c3c;
+}
+
+.nav-btn.logout:hover {
+  background: #c0392b;
+}
+
+.teams-content {
+  flex: 1;
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.teams-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.teams-header h1 {
+  color: white;
+  margin: 0;
+  font-size: 32px;
+}
+
+.teams-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.action-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.action-btn.create {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.action-btn.join {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.no-teams {
+  text-align: center;
+  color: #9ca3af;
+  padding: 60px 20px;
+}
+
+.no-teams p {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.no-teams .error-text {
+  color: #ef4444;
+}
+
+.no-teams button {
+  margin-top: 20px;
+}
+
+.teams-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.team-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  gap: 15px;
+}
+
+.team-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.team-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.team-avatar span {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.team-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.team-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.team-info h3 {
+  color: white;
+  margin: 0 0 5px 0;
+  font-size: 18px;
+}
+
+.team-description {
+  color: #9ca3af;
+  font-size: 14px;
+  margin: 0 0 10px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.team-meta {
+  display: flex;
+  gap: 15px;
+  font-size: 12px;
+}
+
+.member-count {
+  color: #6b7280;
+}
+
+.team-role {
+  color: #667eea;
+  text-transform: capitalize;
+}
+
+.loading {
+  color: white;
+  text-align: center;
+  padding: 60px;
+  font-size: 18px;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: #1f2937;
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 400px;
+  width: 90%;
+}
+
+.modal h2 {
+  color: white;
+  margin: 0 0 20px 0;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  color: #9ca3af;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  background: #111827;
+  color: white;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.modal-actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.modal-actions button:first-child {
+  background: #374151;
+  color: white;
+}
+
+.modal-actions button.primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.modal-actions button:hover {
+  opacity: 0.9;
+}
+
+.error-message {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}

@@ -1,0 +1,268 @@
+.member-context-menu {
+  position: fixed;
+  min-width: 220px;
+  max-width: 280px;
+  background: #1e1e2e;
+  border: 1px solid #2d2d44;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  overflow: hidden;
+  animation: fadeIn 0.15s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Header */
+.menu-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+}
+
+.menu-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.menu-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.menu-avatar .avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.menu-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.menu-username {
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.menu-real-name {
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.menu-role-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  margin-top: 4px;
+  width: fit-content;
+}
+
+.menu-role-badge.owner {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: #1a1a2e;
+}
+
+.menu-role-badge.admin {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+}
+
+.menu-role-badge.moderator {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  color: white;
+}
+
+.menu-role-badge.member {
+  background: #374151;
+  color: #9ca3af;
+}
+
+/* Divider */
+.menu-divider {
+  height: 1px;
+  background: #2d2d44;
+  margin: 4px 0;
+}
+
+/* Menu items */
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 15px;
+  background: transparent;
+  border: none;
+  color: #e5e7eb;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.menu-item:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.menu-item.danger {
+  color: #ef4444;
+}
+
+.menu-item.danger:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.menu-item.coming-soon {
+  color: #6b7280;
+}
+
+.menu-icon {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+.coming-soon-badge {
+  margin-left: auto;
+  font-size: 10px;
+  padding: 2px 6px;
+  background: #374151;
+  border-radius: 4px;
+  color: #9ca3af;
+}
+
+/* Submenu */
+.menu-item-with-submenu {
+  position: relative;
+}
+
+.submenu-arrow {
+  margin-left: auto;
+  font-size: 10px;
+  color: #6b7280;
+}
+
+.submenu {
+  background: #252535;
+  border-radius: 4px;
+  margin: 4px 8px 8px;
+  overflow: hidden;
+}
+
+.submenu-item {
+  display: block;
+  width: 100%;
+  padding: 8px 15px;
+  background: transparent;
+  border: none;
+  color: #e5e7eb;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.submenu-item:hover {
+  background: rgba(102, 126, 234, 0.2);
+}
+
+.submenu-item.active {
+  background: rgba(102, 126, 234, 0.3);
+  color: #667eea;
+}
+
+.submenu-item:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Nickname input */
+.nickname-input-container {
+  padding: 8px 12px;
+}
+
+.nickname-input-container input {
+  width: 100%;
+  padding: 8px 10px;
+  background: #111827;
+  border: 1px solid #374151;
+  border-radius: 4px;
+  color: white;
+  font-size: 13px;
+  box-sizing: border-box;
+}
+
+.nickname-input-container input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.nickname-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.nickname-actions button {
+  flex: 1;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.nickname-actions button:first-child {
+  background: #667eea;
+  color: white;
+}
+
+.nickname-actions button:first-child:hover {
+  background: #5a6fd6;
+}
+
+.nickname-actions button:last-child {
+  background: #374151;
+  color: white;
+}
+
+.nickname-actions button:last-child:hover {
+  background: #4b5563;
+}

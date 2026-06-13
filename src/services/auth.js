@@ -147,3 +147,62 @@ export const updateProfile = async (data) => {
 export const isAuthenticated = () => {
   return !!getAccessToken()
 }
+
+// ==================== AVATAR ====================
+
+// Subir foto de perfil
+export const uploadAvatar = async (file) => {
+  const token = getAccessToken()
+  if (!token) throw new Error('No autenticado')
+
+  const formData = new FormData()
+  formData.append('avatar', file)
+
+  const response = await fetch(`${API_URL}/users/me/avatar/`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+    body: formData,
+  })
+
+  if (response.status === 401) {
+    await refreshAccessToken()
+    return uploadAvatar(file)
+  }
+
+  if (!response.ok) {
+    throw new Error('Error al subir foto de perfil')
+  }
+
+  return await response.json()
+}
+
+// Eliminar foto de perfil
+export const deleteAvatar = async () => {
+  const token = getAccessToken()
+  if (!token) throw new Error('No autenticado')
+
+  const response = await fetch(`${API_URL}/users/me/avatar/`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  })
+
+  if (response.status === 401) {
+    await refreshAccessToken()
+    return deleteAvatar()
+  }
+
+  if (!response.ok) {
+    throw new Error('Error al eliminar foto de perfil')
+  }
+}
+
+// Obtener URL del avatar
+export const getAvatarUrl = (avatarPath) => {
+  if (!avatarPath) return null
+  if (avatarPath.startsWith('http')) return avatarPath
+  return `http://localhost:8000${avatarPath}`
+}

@@ -14,6 +14,17 @@ function Login() {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
+  // Verificar si hay invitación pendiente
+  const checkPendingInvite = () => {
+    const pendingInvite = localStorage.getItem('pending_invite')
+    if (pendingInvite) {
+      localStorage.removeItem('pending_invite')
+      navigate(`/invite/${pendingInvite}`)
+    } else {
+      navigate('/home')
+    }
+  }
+
   const handleLogin = async (e) => {
     e.preventDefault()
     setError('')
@@ -21,7 +32,7 @@ function Login() {
 
     try {
       await login(email, password)
-      navigate('/home')
+      checkPendingInvite()
     } catch (err) {
       setError(err.message)
     } finally {

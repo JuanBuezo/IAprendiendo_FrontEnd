@@ -1,0 +1,260 @@
+.member-list {
+  position: relative;
+  background: #16213e;
+  border-left: 1px solid #2d2d44;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  transition: width 0.3s ease, min-width 0.3s ease;
+}
+
+.member-list.expanded {
+  width: 240px;
+  min-width: 240px;
+}
+
+.member-list.collapsed {
+  width: 0;
+  min-width: 0;
+  background: transparent;
+  border-left: none;
+}
+
+.member-list.collapsed .member-list-header,
+.member-list.collapsed .member-list-content {
+  display: none;
+}
+
+/* Toggle button */
+.member-list-toggle {
+  position: absolute;
+  top: 12px;
+  background: #16213e;
+  border: 1px solid #2d2d44;
+  color: #9ca3af;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 10;
+}
+
+/* Expanded: botón a la izquierda del panel */
+.member-list.expanded .member-list-toggle {
+  left: -24px;
+  width: 24px;
+  height: 48px;
+  border-radius: 8px 0 0 8px;
+  border-right: none;
+}
+
+/* Collapsed: pestaña saliente del borde derecho */
+.member-list.collapsed .member-list-toggle {
+  right: 0;
+  left: auto;
+  width: 16px;
+  height: 64px;
+  border-radius: 8px 0 0 8px;
+  border-right: none;
+  background: linear-gradient(180deg, #1e2a4a 0%, #16213e 100%);
+}
+
+.member-list-toggle:hover {
+  background: #1e2a4a;
+  color: white;
+}
+
+.member-list.collapsed .member-list-toggle:hover {
+  width: 20px;
+  background: linear-gradient(180deg, #2a3a5a 0%, #1e2a4a 100%);
+}
+
+/* Header */
+.member-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #2d2d44;
+  flex-shrink: 0;
+}
+
+.member-list-header h3 {
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.member-count {
+  background: #374151;
+  color: #9ca3af;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.member-list-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+/* Sections */
+.member-section {
+  margin-bottom: 4px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 6px 12px;
+  background: transparent;
+  border: none;
+  color: #6b7280;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.section-header:hover {
+  color: #9ca3af;
+}
+
+.section-arrow {
+  font-size: 8px;
+  width: 10px;
+}
+
+.section-label {
+  flex: 1;
+  text-align: left;
+}
+
+.section-count {
+  font-size: 10px;
+  color: #4b5563;
+}
+
+/* Member items */
+.section-members {
+  padding: 2px 8px;
+}
+
+.member-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 6px 8px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.member-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.member-item.is-me {
+  background: rgba(102, 126, 234, 0.1);
+}
+
+.member-item.is-me:hover {
+  background: rgba(102, 126, 234, 0.15);
+}
+
+/* Avatar */
+.member-avatar {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+.member-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.member-avatar .avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: bold;
+  font-size: 13px;
+  border-radius: 50%;
+}
+
+.online-indicator {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #374151;
+  border: 3px solid #16213e;
+}
+
+.online-indicator.online {
+  background: #22c55e;
+}
+
+/* Name */
+.member-name {
+  flex: 1;
+  text-align: left;
+  color: #d1d5db;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.member-item:hover .member-name {
+  color: white;
+}
+
+.me-badge {
+  color: #6b7280;
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+/* Scrollbar */
+.member-list-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.member-list-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.member-list-content::-webkit-scrollbar-thumb {
+  background: #374151;
+  border-radius: 3px;
+}
+
+.member-list-content::-webkit-scrollbar-thumb:hover {
+  background: #4b5563;
+}
