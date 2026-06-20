@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { getTeam, getChannels, getMembers } from '../services/teams'
+import { getTeam, getChannels, getMembers, deleteTeam, updateTeam, updateTeamAvatar } from '../services/teams'
+import { getProfile } from '../services/auth'
+import { hasAdminAccess } from '../services/admin'
 import { getRootFolder } from '../services/files'
 import Navbar from '../components/Navbar'
 import ChannelSidebar from '../components/teams/ChannelSidebar'
@@ -24,9 +26,16 @@ function Team() {
   const [showInvitations, setShowInvitations] = useState(false)
   const [members, setMembers] = useState([])
   const [loading, setLoading] = useState(true)
+  // Team management
+  const [teamMenuOpen, setTeamMenuOpen] = useState(false)
+  const [renameModal, setRenameModal] = useState(false)
+  const [renameVal, setRenameVal] = useState('')
+  const [currentUser, setCurrentUser] = useState(null)
+  const teamAvatarInputRef = useRef(null)
 
   useEffect(() => {
     loadTeamData()
+    getProfile().then(setCurrentUser).catch(() => {})
   }, [teamId])
 
   const loadTeamData = async () => {
@@ -78,6 +87,39 @@ function Team() {
     }
   }
 
+  const canManageTeam = () => {
+    if (!currentUser || !team) return false
+    return hasAdminAccess(currentUser) || team.my_role === 'owner' || team.my_role === 'admin'
+  }
+
+  const handleDeleteTeam = async () => {
+    if (!confirm('¿Eliminar este equipo? Esta acción es irreversible.')) return
+    try {
+      await deleteTeam(teamId)
+      navigate('/teams')
+    } catch (err) { alert(err.message) }
+  }
+
+  const handleRenameTeam = async () => {
+    if (!renameVal.trim()) return
+    try {
+      const updated = await updateTeam(teamId, { name: renameVal.trim() })
+      setTeam(prev => ({ ...prev, name: updated.name }))
+      setRenameModal(false)
+      setRenameVal('')
+    } catch (err) { alert(err.message) }
+  }
+
+  const handleTeamAvatarChange = async (e) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    try {
+      const updated = await updateTeamAvatar(teamId, file)
+      setTeam(prev => ({ ...prev, avatar: updated.avatar }))
+    } catch (err) { alert(err.message) }
+    e.target.value = ''
+  }
+
   const handleSelectChannel = (channel) => {
     setSelectedChannel(channel)
   }
@@ -126,8 +168,32 @@ function Team() {
 
       <header className="team-header">
         <div className="team-title">
-          <h1>{team?.name}</h1>
+          {/* Nombre del equipo con menú de gestión */}
+          <div className="team-title-menu" style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 6 }}>
+            <h1
+              style={{ cursor: canManageTeam() ? 'pointer' : 'default', userSelect: 'none' }}
+              onClick={() => canManageTeam() && setTeamMenuOpen(v => !v)}
+              title={canManageTeam() ? 'Gestionar equipo' : undefined}
+            >{team?.name}</h1>
+            {canManageTeam() && (
+              <>
+                <div
+                  style={{ fontSize: 13, color: '#9ca3af', cursor: 'pointer', paddingBottom: 2 }}
+                  onClick={() => setTeamMenuOpen(v => !v)}
+                  title="Opciones del equipo"
+                >▾</div>
+                {teamMenuOpen && (
+                  <div className="team-header-dropdown" onClick={e => e.stopPropagation()}>
+                    <button onClick={() => { setTeamMenuOpen(false); setRenameModal(true); setRenameVal(team?.name || '') }}>✏️ Cambiar nombre</button>
+                    <button onClick={() => { setTeamMenuOpen(false); teamAvatarInputRef.current?.click() }}>📷 Cambiar foto</button>
+                    <button className="danger" onClick={() => { setTeamMenuOpen(false); handleDeleteTeam() }}>🗑️ Eliminar equipo</button>
+                  </div>
+                )}
+              </>
+            )}
+          </div>
           <span className="team-role-badge">{team?.my_role}</span>
+          <input type="file" ref={teamAvatarInputRef} accept="image/*" hidden onChange={handleTeamAvatarChange} />
         </div>
         <div className="header-actions">
           {canManageInvitations && (
@@ -201,6 +267,28 @@ function Team() {
         <div className="modal-overlay" onClick={() => setShowInvitations(false)}>
           <div onClick={(e) => e.stopPropagation()}>
             <InvitationManager team={team} onClose={() => setShowInvitations(false)} />
+          </div>
+        </div>
+      )}
+      {/* Modal Renombrar Equipo */}
+      {renameModal && (
+        <div className="modal-overlay" onClick={() => setRenameModal(false)}>
+          <div className="modal" onClick={e => e.stopPropagation()}>
+            <h2>Cambiar nombre del equipo</h2>
+            <div className="form-group">
+              <label>Nuevo nombre</label>
+              <input
+                type="text"
+                value={renameVal}
+                onChange={e => setRenameVal(e.target.value)}
+                autoFocus
+                onKeyDown={e => { if (e.key === 'Enter') handleRenameTeam() }}
+              />
+            </div>
+            <div className="modal-actions">
+              <button onClick={() => setRenameModal(false)}>Cancelar</button>
+              <button className="primary" onClick={handleRenameTeam} disabled={!renameVal.trim()}>Guardar</button>
+            </div>
           </div>
         </div>
       )}

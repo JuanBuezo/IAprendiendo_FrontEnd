@@ -1,0 +1,212 @@
+.study-sidebar {
+  width: 260px;
+  min-width: 260px;
+  background: #111827;
+  border-right: 1px solid #2d2d44;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.study-sidebar-header {
+  padding: 15px;
+  border-bottom: 1px solid #2d2d44;
+  flex-shrink: 0;
+}
+
+.study-sidebar-header h3 {
+  color: white;
+  font-size: 15px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.new-session-btn {
+  margin: 12px 10px 0;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  width: calc(100% - 20px);
+  transition: opacity 0.2s, transform 0.2s;
+  text-align: center;
+}
+
+.new-session-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.sidebar-separator {
+  border: none;
+  border-top: 1px solid #2d2d44;
+  margin: 12px 0 0;
+}
+
+.study-sessions-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+.study-sessions-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.study-sessions-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.study-sessions-list::-webkit-scrollbar-thumb {
+  background: #374151;
+  border-radius: 3px;
+}
+
+.study-sessions-list::-webkit-scrollbar-thumb:hover {
+  background: #4b5563;
+}
+
+.no-sessions {
+  text-align: center;
+  padding: 20px 15px;
+  color: #6b7280;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.study-session-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  margin: 2px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #9ca3af;
+  transition: all 0.2s;
+  gap: 6px;
+}
+
+.study-session-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+}
+
+.study-session-item.selected {
+  background: rgba(102, 126, 234, 0.2);
+  color: white;
+}
+
+.session-item-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.session-item-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.session-item-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.session-item-title {
+  font-size: 13px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.session-item-meta {
+  font-size: 11px;
+  color: #6b7280;
+  margin-top: 1px;
+}
+
+.study-session-item.selected .session-item-meta {
+  color: #9ca3af;
+}
+
+/* Session menu (3 dots) */
+.session-menu-container {
+  position: relative;
+  opacity: 0;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+
+.study-session-item:hover .session-menu-container {
+  opacity: 1;
+}
+
+.session-menu-trigger {
+  background: transparent;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.session-menu-trigger:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.session-menu-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 4px;
+  min-width: 160px;
+  background: #1e1e2e;
+  border: 1px solid #2d2d44;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  z-index: 100;
+  overflow: hidden;
+}
+
+.session-menu-dropdown button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 14px;
+  background: transparent;
+  border: none;
+  color: #e5e7eb;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.session-menu-dropdown button:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.session-menu-dropdown button.danger {
+  color: #ef4444;
+}
+
+.session-menu-dropdown button.danger:hover {
+  background: rgba(239, 68, 68, 0.1);
+}

@@ -64,6 +64,20 @@ export const updateTeam = async (teamId, data) => {
   return response.json()
 }
 
+// Cambiar avatar del equipo (multipart)
+export const updateTeamAvatar = async (teamId, imageFile) => {
+  const token = getAccessToken()
+  const formData = new FormData()
+  formData.append('avatar', imageFile)
+  const response = await fetch(`${API_URL}/teams/${teamId}/`, {
+    method: 'PATCH',
+    headers: { Authorization: `Bearer ${token}` },
+    body: formData,
+  })
+  if (!response.ok) throw new Error('Error al cambiar avatar del equipo')
+  return response.json()
+}
+
 // Eliminar equipo
 export const deleteTeam = async (teamId) => {
   const response = await authFetch(`${API_URL}/teams/${teamId}/`, {

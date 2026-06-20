@@ -1,0 +1,130 @@
+/* ── Página principal LaTeX ─────────────────────────────────────────────── */
+.latex-page {
+  display: flex;
+  height: calc(100vh - 56px); /* descontar navbar */
+  overflow: hidden;
+  background: #1a1a2e;
+}
+
+.latex-page-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 56px);
+  color: #8090a0;
+  font-size: 16px;
+  background: #1a1a2e;
+}
+
+/* ── Sidebar ──────────────────────────────────────────────────────────────── */
+.latex-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background: #16213e;
+  border-right: 1px solid #0f3460;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.latex-sidebar-header {
+  padding: 14px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #8090a0;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #0f3460;
+  flex-shrink: 0;
+}
+
+.latex-new-form {
+  display: flex;
+  gap: 6px;
+  padding: 10px 12px;
+  border-bottom: 1px solid #0f3460;
+  flex-shrink: 0;
+}
+
+.latex-new-form input {
+  flex: 1;
+  background: #1a1a2e;
+  border: 1px solid #0f3460;
+  border-radius: 4px;
+  color: #e0e0e0;
+  padding: 5px 8px;
+  font-size: 12px;
+  outline: none;
+}
+.latex-new-form input:focus { border-color: #2980b9; }
+
+.latex-new-form button {
+  background: #0f3460;
+  color: #e0e0e0;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  transition: background 0.2s;
+}
+.latex-new-form button:hover:not(:disabled) { background: #1a5276; }
+.latex-new-form button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.latex-doc-list {
+  flex: 1;
+  overflow-y: auto;
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+}
+
+.latex-doc-empty {
+  padding: 16px;
+  color: #505878;
+  font-size: 12px;
+  text-align: center;
+}
+
+.latex-doc-item {
+  padding: 10px 14px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: background 0.15s;
+}
+.latex-doc-item:hover    { background: #1a2540; }
+.latex-doc-item.active   { background: #1a2a50; border-left-color: #2980b9; }
+
+.latex-doc-title {
+  display: block;
+  font-size: 13px;
+  color: #d0d8e8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.latex-doc-id {
+  display: block;
+  font-size: 10px;
+  color: #505878;
+  margin-top: 2px;
+}
+
+/* ── Editor principal ─────────────────────────────────────────────────────── */
+.latex-main {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.latex-no-doc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #505878;
+  font-size: 15px;
+}

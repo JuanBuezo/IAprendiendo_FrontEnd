@@ -111,6 +111,12 @@ export const updateFile = async (fileId, data) => {
   return response.json()
 }
 
+// Renombrar archivo (alias semántico)
+export const renameFile = (fileId, newName) => updateFile(fileId, { name: newName })
+
+// Mover archivo a otra carpeta
+export const moveFile = (fileId, targetFolderId) => updateFile(fileId, { folder: targetFolderId })
+
 // Eliminar archivo
 export const deleteFile = async (fileId) => {
   const response = await authFetch(`${API_URL}/files/${fileId}/`, {
@@ -231,6 +237,7 @@ export const getFileIcon = (mimeType, extension) => {
   if (extension === 'css') return '🎨'
   if (extension === 'json') return '📋'
   if (extension === 'md') return '📑'
+  if (extension === 'tex') return '🧮'
   return '📄'
 }
 
@@ -248,7 +255,7 @@ export const isPreviewable = (mimeType) => {
 // Verificar si es un archivo de texto editable
 export const isTextFile = (mimeType, extension) => {
   if (!mimeType && !extension) return false
-  const textExtensions = ['md', 'txt', 'json', 'js', 'jsx', 'ts', 'tsx', 'css', 'html', 'py', 'xml', 'yaml', 'yml']
+  const textExtensions = ['md', 'txt', 'tex', 'json', 'js', 'jsx', 'ts', 'tsx', 'css', 'html', 'py', 'xml', 'yaml', 'yml']
   return (
     mimeType?.startsWith('text/') ||
     mimeType === 'application/json' ||

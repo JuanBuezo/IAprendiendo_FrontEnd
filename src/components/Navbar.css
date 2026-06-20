@@ -9,8 +9,9 @@
 }
 
 .navbar .logo {
-  color: #cba6f7;
-  font-size: 1.5rem;
+  height: 38px;
+  width: auto;
+  display: block;
   margin: 0;
 }
 

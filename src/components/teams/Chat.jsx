@@ -1,13 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 import {
   getMessages,
-  getRecentMessages,
-  sendMessage,
   deleteMessage,
   editMessage,
   togglePinMessage,
 } from '../../services/teams'
-import { getAvatarUrl, getProfile } from '../../services/auth'
+import { getAvatarUrl, getProfile, getAccessToken } from '../../services/auth'
 import MemberList from './MemberList'
 import MemberContextMenu from './MemberContextMenu'
 import './Chat.css'
@@ -23,7 +21,7 @@ function Chat({ channel, team, members, onMembersChange }) {
   const [contextMenu, setContextMenu] = useState(null) // {member, position}
   const [messageMenu, setMessageMenu] = useState(null) // messageId
   const messagesEndRef = useRef(null)
-  const pollingRef = useRef(null)
+  const wsRef = useRef(null)
 
   useEffect(() => {
     loadCurrentUser()
@@ -32,9 +30,9 @@ function Chat({ channel, team, members, onMembersChange }) {
   useEffect(() => {
     if (channel) {
       loadMessages()
-      startPolling()
+      connectWebSocket(channel.id)
     }
-    return () => stopPolling()
+    return () => disconnectWebSocket()
   }, [channel?.id])
 
   // Cerrar menus al hacer clic fuera
@@ -60,7 +58,10 @@ function Chat({ channel, team, members, onMembersChange }) {
     setLoading(true)
     try {
       const data = await getMessages(channel.id)
-      setMessages(Array.isArray(data) ? data : [])
+      // El backend devuelve mensajes ordenados por -created_at (más recientes primero)
+      // para paginación eficiente. Los invertimos para mostrarlos cronológicamente.
+      const ordered = Array.isArray(data) ? [...data].reverse() : []
+      setMessages(ordered)
     } catch (err) {
       console.error('Error al cargar mensajes:', err)
     } finally {
@@ -68,27 +69,44 @@ function Chat({ channel, team, members, onMembersChange }) {
     }
   }
 
-  const startPolling = () => {
-    stopPolling()
-    pollingRef.current = setInterval(async () => {
-      if (!channel || messages.length === 0) return
+  const connectWebSocket = (channelId) => {
+    disconnectWebSocket()
+
+    const token = getAccessToken()
+    if (!token) return
+
+    const ws = new WebSocket(`ws://localhost:8000/ws/chat/${channelId}/?token=${token}`)
+
+    ws.onmessage = (event) => {
       try {
-        const lastMessage = messages[messages.length - 1]
-        const since = lastMessage?.created_at || new Date().toISOString()
-        const newMessages = await getRecentMessages(channel.id, since)
-        if (newMessages.length > 0) {
-          setMessages((prev) => [...prev, ...newMessages])
+        const data = JSON.parse(event.data)
+        if (data.type === 'chat_message') {
+          setMessages((prev) => [...prev, data.message])
         }
       } catch (err) {
-        console.error('Error en polling:', err)
+        console.error('Error al procesar mensaje WebSocket:', err)
       }
-    }, 3000)
+    }
+
+    ws.onerror = (err) => {
+      console.error('WebSocket error:', err)
+    }
+
+    ws.onclose = (event) => {
+      // Reconectar automáticamente si el cierre no fue limpio (p.ej. corte de red)
+      if (event.code !== 1000 && event.code !== 4001 && event.code !== 4003) {
+        setTimeout(() => connectWebSocket(channelId), 3000)
+      }
+    }
+
+    wsRef.current = ws
   }
 
-  const stopPolling = () => {
-    if (pollingRef.current) {
-      clearInterval(pollingRef.current)
-      pollingRef.current = null
+  const disconnectWebSocket = () => {
+    if (wsRef.current) {
+      wsRef.current.onclose = null // evitar reconexión al desconectar intencionalmente
+      wsRef.current.close(1000)
+      wsRef.current = null
     }
   }
 
@@ -100,18 +118,19 @@ function Chat({ channel, team, members, onMembersChange }) {
     scrollToBottom()
   }, [messages])
 
-  const handleSendMessage = async (e) => {
+  const handleSendMessage = (e) => {
     e.preventDefault()
-    if (!newMessage.trim() || !channel) return
+    const content = newMessage.trim()
+    if (!content || !channel || !wsRef.current) return
+    if (wsRef.current.readyState !== WebSocket.OPEN) return
 
-    try {
-      const message = await sendMessage(channel.id, newMessage, replyTo?.id)
-      setMessages([...messages, message])
-      setNewMessage('')
-      setReplyTo(null)
-    } catch (err) {
-      console.error('Error al enviar mensaje:', err)
-    }
+    wsRef.current.send(JSON.stringify({
+      type: 'send_message',
+      content,
+      reply_to: replyTo?.id ?? null,
+    }))
+    setNewMessage('')
+    setReplyTo(null)
   }
 
   const handleDeleteMessage = async (messageId) => {
@@ -334,12 +353,12 @@ function Chat({ channel, team, members, onMembersChange }) {
                             {message.is_pinned ? '📌 Desfijar' : '📌 Fijar'}
                           </button>
                         )}
-                        {message.is_own && (
+                        {message.author?.id === currentUser?.id && (
                           <button onClick={() => startEditing(message)}>
                             ✏️ Editar
                           </button>
                         )}
-                        {(message.is_own || canModerate) && (
+                        {(message.author?.id === currentUser?.id || canModerate) && (
                           <button
                             className="danger"
                             onClick={() => handleDeleteMessage(message.id)}

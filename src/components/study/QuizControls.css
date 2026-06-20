@@ -1,0 +1,159 @@
+.quiz-controls {
+  flex-shrink: 0;
+  background: #0f0f1a;
+  border-top: 1px solid #2d2d44;
+  padding: 14px 20px;
+}
+
+.controls-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.control-group label {
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Number stepper */
+.number-stepper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: #111827;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.number-stepper button {
+  padding: 6px 12px;
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.15s;
+  font-weight: 600;
+}
+
+.number-stepper button:hover:not(:disabled) {
+  background: rgba(102, 126, 234, 0.2);
+  color: white;
+}
+
+.number-stepper button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.number-stepper span {
+  min-width: 28px;
+  text-align: center;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0 4px;
+}
+
+/* Type toggle */
+.toggle-options {
+  display: flex;
+  gap: 0;
+  background: #111827;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.type-btn {
+  padding: 7px 12px;
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.type-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+}
+
+.type-btn.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.type-btn:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+/* Difficulty select */
+.difficulty-select {
+  padding: 7px 10px;
+  background: #111827;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.difficulty-select:focus {
+  border-color: #667eea;
+}
+
+.difficulty-select:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* Generate button */
+.generate-btn {
+  padding: 9px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: opacity 0.2s, transform 0.2s;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+.generate-btn:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.generate-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+  transform: none;
+}
+
+.controls-hint {
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: #f59e0b;
+}

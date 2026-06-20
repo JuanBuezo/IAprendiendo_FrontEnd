@@ -301,6 +301,110 @@
   background: rgba(0, 0, 0, 0.7);
 }
 
+/* ── 3-dot menu en grid-item ─────────────────────────────────────────────── */
+.item-menu-wrap {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.grid-item:hover .item-menu-wrap {
+  opacity: 1;
+}
+
+.item-menu-btn {
+  background: rgba(0, 0, 0, 0.55);
+  border: none;
+  color: #e5e7eb;
+  font-size: 16px;
+  line-height: 1;
+  width: 26px;
+  height: 26px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.item-menu-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.item-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 100;
+  background: #1e2233;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  min-width: 148px;
+  padding: 4px 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+  margin-top: 2px;
+}
+
+.item-dropdown button {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  color: #e5e7eb;
+  padding: 8px 14px;
+  text-align: left;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.item-dropdown button:hover {
+  background: rgba(255,255,255,0.07);
+}
+
+.item-dropdown button.danger {
+  color: #f87171;
+}
+
+.item-dropdown button.danger:hover {
+  background: rgba(248,113,113,0.12);
+}
+
+/* ── Folder/file picker modal ────────────────────────────────────────────── */
+.folder-picker {
+  max-height: 240px;
+  overflow-y: auto;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  padding: 8px;
+  margin: 10px 0;
+  background: #111827;
+  font-size: 13px;
+}
+
+.picker-folder {
+  display: flex;
+  align-items: center;
+  padding: 5px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #d1d5db;
+  transition: background 0.12s;
+  user-select: none;
+}
+
+.picker-folder:hover {
+  background: rgba(255,255,255,0.07);
+}
+
+.picker-selected {
+  background: rgba(102, 126, 234, 0.25) !important;
+  color: #a5b4fc;
+}
+
 /* Overlay de drop */
 .drop-overlay {
   position: absolute;
@@ -367,10 +471,37 @@
   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
+.export-pdf-btn {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.export-pdf-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 87, 108, 0.4);
+}
+
+.export-pdf-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .text-viewer {
   flex: 1;
   overflow-y: auto;
   padding: 20px;
+}
+
+.text-viewer.latex-viewer {
+  padding: 0;
+  background: #fff;
 }
 
 .markdown-preview {

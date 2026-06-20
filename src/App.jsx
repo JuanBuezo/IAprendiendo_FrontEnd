@@ -6,6 +6,8 @@ import Team from './pages/Team'
 import Projects from './pages/Projects'
 import Profile from './pages/Profile'
 import InvitePage from './pages/InvitePage'
+import Study from './pages/Study'
+import LaTeX from './pages/LaTeX'
 // Admin pages
 import AdminHome from './pages/admin/AdminHome'
 import AdminUsers from './pages/admin/AdminUsers'
@@ -22,6 +24,8 @@ function App() {
         <Route path="/teams/:teamId" element={<Team />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/study" element={<Study />} />
+        <Route path="/latex" element={<LaTeX />} />
         <Route path="/invite/:code" element={<InvitePage />} />
         {/* Admin routes */}
         <Route path="/admin" element={<AdminHome />} />

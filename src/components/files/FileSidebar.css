@@ -180,6 +180,7 @@
   color: #9ca3af;
   transition: all 0.15s;
   gap: 6px;
+  position: relative;
 }
 
 .file-row:hover {
@@ -198,6 +199,104 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+/* ── 3-dot menu en file-row (sidebar) ─────────────────────────────────────── */
+.file-row-menu {
+  position: relative;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.12s;
+}
+
+.file-row:hover .file-row-menu {
+  opacity: 1;
+}
+
+.file-row-menu-btn {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  font-size: 15px;
+  line-height: 1;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s, color 0.12s;
+}
+
+.file-row-menu-btn:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+.file-row-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 200;
+  background: #1e2233;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  min-width: 148px;
+  padding: 4px 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  margin-top: 2px;
+}
+
+.file-row-dropdown button {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  color: #e5e7eb;
+  padding: 7px 12px;
+  text-align: left;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.file-row-dropdown button:hover {
+  background: rgba(255,255,255,0.07);
+}
+
+.file-row-dropdown button.danger {
+  color: #f87171;
+}
+
+.file-row-dropdown button.danger:hover {
+  background: rgba(248,113,113,0.12);
+}
+
+/* Folder picker (shared modal style) */
+.folder-picker {
+  max-height: 220px;
+  overflow-y: auto;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  padding: 8px;
+  margin: 10px 0;
+  background: #111827;
+  font-size: 13px;
+}
+
+.picker-folder {
+  display: flex;
+  align-items: center;
+  padding: 5px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #d1d5db;
+  transition: background 0.12s;
+  user-select: none;
+}
+
+.picker-folder:hover { background: rgba(255,255,255,0.07); }
+.picker-selected { background: rgba(102,126,234,0.25) !important; color: #a5b4fc; }
 
 /* Modal */
 .modal-overlay {

@@ -49,11 +49,11 @@ function Home() {
             <div className="card-arrow">→</div>
           </div>
 
-          <div className="dashboard-card" onClick={() => navigate('/projects')}>
-            <div className="card-icon">📁</div>
+          <div className="dashboard-card" onClick={() => navigate('/study')}>
+            <div className="card-icon">🤖</div>
             <div className="card-content">
-              <h2>Proyectos</h2>
-              <p>Accede a tus proyectos editados recientemente</p>
+              <h2>Herramienta de estudio</h2>
+              <p>Genera quizzes con IA sobre tus documentos y mejora tu aprendizaje</p>
             </div>
             <div className="card-arrow">→</div>
           </div>

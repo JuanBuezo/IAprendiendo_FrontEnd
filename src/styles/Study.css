@@ -1,0 +1,89 @@
+.study-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #1a1a2e;
+  overflow: hidden;
+}
+
+.study-layout {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.study-loading {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: #9ca3af;
+  font-size: 15px;
+}
+
+.study-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #2d2d44;
+  border-top-color: #667eea;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Empty state */
+.study-empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px;
+  text-align: center;
+}
+
+.empty-robot {
+  font-size: 72px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.study-empty-state h2 {
+  color: white;
+  font-size: 28px;
+  margin: 0;
+}
+
+.study-empty-state p {
+  color: #6b7280;
+  font-size: 15px;
+  max-width: 420px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.empty-create-btn {
+  margin-top: 8px;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.empty-create-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}

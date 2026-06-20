@@ -70,9 +70,13 @@ function Navbar({ showBackButton = false, backPath = '/home', backLabel = 'Inici
 
   return (
     <nav className="navbar">
-      <h2 className="logo" onClick={() => navigate('/home')} style={{ cursor: 'pointer' }}>
-        IAprendiendo
-      </h2>
+      <img
+        src="/logo-full.png"
+        alt="IAprendiendo"
+        className="logo"
+        onClick={() => navigate('/home')}
+        style={{ cursor: 'pointer' }}
+      />
       <div className="nav-buttons">
         {showBackButton && (
           <button className="nav-btn" onClick={() => navigate(backPath)}>
